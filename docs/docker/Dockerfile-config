@@ -1,0 +1,6 @@
+FROM java:8-jre
+
+ADD ./jar/emake-config.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/emake-config.jar"]
+
+EXPOSE 4001

@@ -1,0 +1,6 @@
+FROM java:8-jre
+
+ADD ./jar/emake-mps.jar /app/
+
+CMD ["java", "-Xmx500m",  "-jar", "/app/emake-mps.jar"]
+

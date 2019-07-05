@@ -1,0 +1,76 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://192.168.0.47:3306/emake?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+  redis:
+    database: 0
+    host: 192.168.0.47
+    port: 6379
+    password:
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 200 # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 10  # 连接池中的最大空闲连接
+        max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 10  # 连接池中的最小空闲连接
+#spring:
+#  zipkin:
+#    rabbitmq:
+#      queue: zipkin
+#  sleuth:
+#    sampler:
+#      percentage: 0.2
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 1000
+    socket-timeout-millis: 1000
+  ratelimit:
+    key-prefix: emake-ratelimite
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    policies:
+      emake-mps:
+        limit: 100
+        quota: 100
+        refresh-interval: 3
+      emake-demo:
+        limit: 100
+        quota: 100
+        refresh-interval: 3
+  ribbon-isolation-strategy: thread
+
+security:
+  oauth2:
+    client:
+      client-id: emake
+      client-secret: 123456
+    resource:
+      jwt:
+         key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
+
+ignore:
+  urls:
+    - /authentication/**
+    - /css/*.css
+    - /js/*.js
+    - /actuator/**
+    - /hystrix/**
+    - /metrics/**
+    - /loggers/**
+    - /mobile/cookie
+
+
+ribbon:
+  eager-load:
+    enabled: true
+    clients: emake-auth,emake-mps-service,emake-demo-service
+

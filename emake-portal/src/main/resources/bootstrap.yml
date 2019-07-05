@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: emake-portal
+  profiles:
+    active: dev
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        service-id: emake-config-server
+        enabled: true
+      profile: ${spring.profiles.active}
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 20
+  client:
+    service-url:
+      defaultZone: http://localhost:1025/eureka/
+
+#开启debug信息
+#logging:
+#  level:
+#    org.springframework: DEBUG

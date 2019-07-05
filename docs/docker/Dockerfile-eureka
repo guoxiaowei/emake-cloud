@@ -1,0 +1,6 @@
+FROM java:8-jre
+
+ADD ./jar/emake-eureka.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/emake-eureka.jar"]
+
+EXPOSE 1025

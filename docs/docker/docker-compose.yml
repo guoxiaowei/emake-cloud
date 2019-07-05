@@ -1,0 +1,74 @@
+version: '2'
+services:
+  emake-eureka:
+    build:
+      context: ./
+      dockerfile: Dockerfile-eureka
+    restart: always
+    ports:
+      - 1025:1025
+
+  emake-config:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-config
+    restart: always
+
+  emake-portal-data:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-portal-data
+    restart: always
+
+  emake-portal:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-portal
+    restart: always
+
+  emake-passport:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-passport
+    restart: always
+
+  emake-mps:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-mps
+    restart: always
+
+  emake-auth:
+    links:
+      - emake-eureka:eureka
+    build:
+      context: ./
+      dockerfile: Dockerfile-auth
+    restart: always
+    ports:
+      - 3000:3000
+
+  emake-gateway:
+    links:
+      - emake-eureka:eureka
+      - emake-auth:auth
+    build:
+      context: ./
+      dockerfile: Dockerfile-gateway
+    restart: always
+    ports:
+      - 9999:9999
+
+
+
+

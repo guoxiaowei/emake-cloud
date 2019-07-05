@@ -1,0 +1,5 @@
+FROM java:8-jre
+
+ADD ./jar/emake-portal-data.jar /app/
+
+CMD ["java", "-Xmx500m", "-jar", "/app/emake-portal-data.jar"]
