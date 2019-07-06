@@ -12,8 +12,8 @@
     <description>member manager system</description>
 
     <parent>
-        <groupId>com.github</groupId>
-        <artifactId>emake</artifactId>
+        <groupId>com.emake</groupId>
+        <artifactId>forest</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 

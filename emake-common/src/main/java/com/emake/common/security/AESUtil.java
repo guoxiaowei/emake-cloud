@@ -1,5 +1,6 @@
 package com.emake.common.security;
 
+
 import org.apache.commons.lang3.StringUtils;
 
 /**

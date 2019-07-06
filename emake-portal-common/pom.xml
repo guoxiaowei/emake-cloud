@@ -12,8 +12,8 @@
     <description>common portal bean</description>
 
     <parent>
-        <groupId>com.github</groupId>
-        <artifactId>emake</artifactId>
+        <groupId>com.emake</groupId>
+        <artifactId>forest</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
